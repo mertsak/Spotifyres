@@ -18,6 +18,7 @@ module.exports = {
         suggested_bg: "hsla(0,0%,100%,0.1)",
         suggested_bg_hover: "hsla(0,0%,100%,0.2)",
         social_bg: "rgb(41, 41, 41)",
+        facebook: "#384F81",
       },
       gridTemplateColumns: {
         auto_fit: "repeat(auto-fit, minmax(200px, 1fr))",
