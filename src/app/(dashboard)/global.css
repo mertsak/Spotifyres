@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    color: #ffff;
+  }
+
+  .wrapper {
+    height: calc(100% - 6rem);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.contextmenu {
+  background-color: #282828 !important;
+}
+
+.contextmenu__item:hover:not(.contextmenu__item--disabled) {
+  background-color: hsla(0, 0%, 100%, 0.1) !important;
+}
+
+.contextmenu .submenu__item {
+  background-color: #282828 !important;
+  border: none !important;
+}
+
+.contextmenu__item {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.contextmenu .submenu:hover > .contextmenu__item {
+  background-color: hsla(0, 0%, 100%, 0.1) !important;
+}
+
+.my-context-menu-submenu {
+  font-size: 12px !important;
+}
+
+.contextmenu .submenu > .contextmenu__item:after {
+  border-color: transparent transparent transparent #ffff !important;
+}
