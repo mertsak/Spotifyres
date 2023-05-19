@@ -1,6 +1,8 @@
+import RegisterForm from "@/components/RegisterForm";
+
 const page = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-[450px] mx-auto  text-center">
+    <div className="flex flex-col justify-center items-center w-[450px] mx-auto text-center">
       {/*  Header */}
       <div className="mt-10 mb-8 w-full flex flex-col justify-center items-center">
         {/*  LOGO */}
@@ -95,6 +97,8 @@ const page = () => {
           veya
         </span>
       </div>
+
+      <RegisterForm />
     </div>
   );
 };
