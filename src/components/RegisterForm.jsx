@@ -1,9 +1,21 @@
 "use client";
-import React from "react";
 import { useFormik } from "formik";
+import Link from "next/link";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = () => {
+  const notify = (values) => {
+    if (
+      values.shareInfo === "" ||
+      values.shareInfo === false ||
+      values.firstName === ""
+    ) {
+      toast.error("Please fill in all fields.");
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -12,168 +24,289 @@ const RegisterForm = () => {
       day: "",
       month: "",
       year: "",
+      gender: "",
+      shareInfo: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
-        .max(15, "Must be 15 characters or less")
+        .min(6, "Must be 6 characters or more.")
+        .max(15, "Must be 15 characters or less.")
         .required("Required"),
       email: Yup.string()
         .email("Invalid email address")
-        .required("E-posta adresini girmen gerekiyor."),
+        .required("You need to enter your e-mail address."),
       password: Yup.string()
-        .min(6, "Şifreniz en az 6 karakter olmalıdır.")
-        .required("Şifrenizi girmen gerekiyor."),
-      day: Yup.string().required("Günü seçmen gerekiyor."),
-      month: Yup.string().required("Ayı seçmen gerekiyor."),
-      year: Yup.string().required("Yılı seçmen gerekiyor."),
+        .required("You need to enter a password.")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
+        ),
+      day: Yup.string().required("Enter a valid day of the month."),
+      month: Yup.string().required("Choose the month you were born."),
+      year: Yup.string().required("Enter a valid year."),
+      gender: Yup.string().required("You need to choose your gender."),
+      shareInfo: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log(values);
     },
   });
+
   return (
     <form
-      className="w-full flex flex-col justify-center items-start"
+      className="w-full flex flex-col gap-6 justify-center items-start text-black"
       onSubmit={formik.handleSubmit}
     >
-      <h2 className="mx-auto w-full">E-posta adresinle kaydol</h2>
+      <h2 className="mx-auto w-full text-lg">E-posta adresinle kaydol</h2>
+
+      <ToastContainer />
 
       {/* Email  */}
-
-      <label className="text-sm text-black" htmlFor="email">
-        What is your e-mail address?
-      </label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
-        className="w-full border-2 border-black rounded-md text-black"
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <div className="text-red-600">{formik.errors.email}</div>
-      ) : null}
+      <div className="flex flex-col justify-center items-start w-full">
+        <label className="text-sm mb-1" htmlFor="email">
+          What is your e-mail address?
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
+          placeholder="Enter your email address"
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <div className="text-red-500 text-xs mt-1">{formik.errors.email}</div>
+        ) : null}
+      </div>
 
       {/* Password  */}
-
-      <label className="text-sm text-black" htmlFor="email">
-        Create password
-      </label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.password}
-        className="w-full border-2 border-black rounded-md text-black"
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <div className="text-red-600">{formik.errors.password}</div>
-      ) : null}
+      <div className="flex flex-col justify-center items-start w-full">
+        <label className="text-sm mb-1" htmlFor="email">
+          Create password
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+          className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
+        />
+        {formik.touched.password && formik.errors.password ? (
+          <div className="text-red-500 text-xs text-left mt-1">
+            {formik.errors.password}
+          </div>
+        ) : null}
+      </div>
 
       {/* Firstname  */}
+      <div className="flex flex-col justify-center items-start w-full">
+        <label className="text-sm mb-1" htmlFor="firstName">
+          What name should we call you by?
+        </label>
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.firstName}
+          className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
+        />
+        {formik.touched.firstName && formik.errors.firstName ? (
+          <div className="text-red-500 text-xs mt-1">
+            {formik.errors.firstName}
+          </div>
+        ) : null}
+      </div>
 
-      <label className="text-sm text-black" htmlFor="firstName">
-        What name should we call you by?
-      </label>
-      <input
-        id="firstName"
-        name="firstName"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.firstName}
-        className="w-full border-2 border-black rounded-md text-black"
-      />
-      {formik.touched.firstName && formik.errors.firstName ? (
-        <div className="text-red-600">{formik.errors.firstName}</div>
-      ) : null}
+      {/* Birthday  */}
+      <div className="flex flex-col justify-center items-start w-full">
+        <p className="mb-1 text-sm">When is your birthday?</p>
 
-      <div className="w-full flex justify-between items-center">
-        {/* Day  */}
+        <div className="w-full flex justify-between items-center">
+          {/* Day  */}
+          <div className="flex w-[25%] flex-col justify-center items-center">
+            <label
+              className="text-sm text-left w-full mb-1 text-gray-900 font-sans"
+              htmlFor="day"
+            >
+              Day
+            </label>
+            <input
+              id="day"
+              name="day"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.day}
+              className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
+            />
+          </div>
 
-        <div className="flex w-[20%] flex-col justify-center items-center">
-          <label className="text-sm text-black text-left w-full" htmlFor="day">
-            Day
-          </label>
-          <input
-            id="day"
-            name="day"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.day}
-            className="w-full border-2 border-black rounded-md text-black"
-          />
-          {formik.touched.day && formik.errors.day ? (
-            <div className="text-red-600">{formik.errors.day}</div>
-          ) : null}
+          {/* Month  */}
+          <div className="flex w-[40%] flex-col justify-center items-center">
+            <label
+              className="text-sm  text-left w-full mb-1 text-gray-900 font-sans"
+              htmlFor="month"
+            >
+              Month
+            </label>
+            <select
+              id="month"
+              name="month"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.month}
+              className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
+            >
+              <option value="" label="Month" />
+              <option value="january" label="January" />
+              <option value="february" label="February" />
+              <option value="march" label="March" />
+              <option value="april" label="April" />
+              <option value="may" label="May" />
+              <option value="june" label="June" />
+              <option value="july" label="July" />
+              <option value="august" label="August" />
+              <option value="september" label="September" />
+              <option value="october" label="October" />
+              <option value="november" label="November" />
+              <option value="december" label="December" />
+            </select>
+          </div>
+
+          {/* Year  */}
+          <div className="flex w-[25%] flex-col justify-center items-center">
+            <label
+              className="text-sm text-left w-full mb-1 text-gray-900 font-sans"
+              htmlFor="year"
+            >
+              Year
+            </label>
+            <input
+              id="year"
+              name="year"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.year}
+              className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
+            />
+          </div>
         </div>
 
-        {/* Month  */}
-        <div className="flex w-[40%] flex-col justify-center items-center">
-          <label
-            className="text-sm text-black text-left w-full"
-            htmlFor="month"
-          >
-            Month
-          </label>
-          <select
-            id="month"
-            name="month"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.month}
-            className="w-full border-2 border-black rounded-md text-black"
-          >
-            <option className="text-black" value="" label="Month" />
-            <option className="text-black" value="january" label="January" />
-            <option className="text-black" value="february" label="February" />
-            <option className="text-black" value="march" label="March" />
-            <option className="text-black" value="april" label="April" />
-            <option className="text-black" value="may" label="May" />
-            <option className="text-black" value="june" label="June" />
-            <option className="text-black" value="july" label="July" />
-            <option className="text-black" value="august" label="August" />
-            <option
-              className="text-black"
-              value="september"
-              label="September"
-            />
-            <option className="text-black" value="october" label="October" />
-            <option className="text-black" value="november" label="November" />
-            <option className="text-black" value="december" label="December" />
-          </select>
+        {/* Error  */}
+        <div className="flex flex-col justify-center items-start w-full mt-3">
+          {formik.touched.day && formik.errors.day ? (
+            <div className="text-red-500 text-xs">{formik.errors.day}</div>
+          ) : null}
 
           {formik.touched.month && formik.errors.month ? (
-            <div className="text-red-600">{formik.errors.month}</div>
+            <div className="text-red-500 text-xs">{formik.errors.month}</div>
           ) : null}
-        </div>
 
-        {/* Year  */}
-        <div className="flex w-[20%] flex-col justify-center items-center">
-          <label className="text-sm text-black text-left w-full" htmlFor="year">
-            Year
-          </label>
-          <input
-            id="year"
-            name="year"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.year}
-            className="w-full border-2 border-black rounded-md text-black"
-          />
           {formik.touched.year && formik.errors.year ? (
-            <div className="text-red-600">{formik.errors.year}</div>
+            <div className="text-red-500 text-xs">{formik.errors.year}</div>
           ) : null}
         </div>
       </div>
 
-      <button type="submit">Submit</button>
+      {/* gender  */}
+      <div className="flex flex-col justify-center items-start w-full">
+        <p className="text-sm mb-1">What is your gender?</p>
+
+        <div className="flex justify-start gap-4 items-center w-full">
+          <label className="flex justify-center items-center gap-1 text-gray-900 font-sans text-sm">
+            <input
+              id="male"
+              name="gender"
+              type="radio"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value="two"
+              className="w-full border border-sidebar_text  rounded-md py-3 pl-2"
+            />
+            Male
+          </label>
+          <label className="flex justify-center items-center gap-1 text-gray-900 font-sans text-sm">
+            <input
+              id="famale"
+              name="gender"
+              type="radio"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value="one"
+              className="w-full border border-sidebar_text rounded-md py-3 pl-2 "
+            />
+            Famale
+          </label>
+          <label className="flex justify-center items-center gap-1 text-gray-900 font-sans text-sm">
+            <input
+              id="other"
+              name="gender"
+              type="radio"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value="other"
+              className="w-full border border-sidebar_text rounded-md py-3 pl-2"
+            />
+            Other
+          </label>
+        </div>
+
+        {formik.touched.gender && formik.errors.gender ? (
+          <div className="text-red-500 text-xs">{formik.errors.gender}</div>
+        ) : null}
+      </div>
+
+      {/* share info  */}
+      <div className="flex flex-col justify-center items-start w-full">
+        <div className="flex justify-center items-start mb-1 gap-2">
+          <input
+            id="shareInfo"
+            name="shareInfo"
+            type="checkbox"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.shareInfo}
+            className="mt-1"
+          />
+          <label className="text-xs text-left text-gray-900">
+            Share my registration data with Spotify's content providers for
+            marketing purposes. Note that your data may be transferred to a
+            country outside of the EEA as outlined in our privacy policy.
+          </label>
+        </div>
+
+        {formik.touched.shareInfo && formik.errors.shareInfo ? (
+          <div className="text-red-500 text-xs">{formik.errors.shareInfo}</div>
+        ) : null}
+      </div>
+
+      {/* register button  */}
+      <div className="flex justify-center items-center w-full">
+        <button
+          onClick={() => notify(formik.values)}
+          className="bg-spotify_green flex justify-center items-center px-12 py-3 rounded-full hover:scale-105 duration-300"
+          type="submit"
+        >
+          Register
+        </button>
+      </div>
+
+      {/* have account  */}
+      <div className="flex justify-center items-center w-full">
+        <span className="flex justify-center items-center gap-2">
+          Do you have an account?
+          <Link href="login" className="text-spotify_green underline">
+            Sign in.
+          </Link>
+        </span>
+      </div>
     </form>
   );
 };
