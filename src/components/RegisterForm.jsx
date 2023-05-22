@@ -300,7 +300,7 @@ const RegisterForm = () => {
 
       {/* have account  */}
       <div className="flex justify-center items-center w-full">
-        <span className="flex justify-center items-center gap-2">
+        <span className="flex justify-center items-center gap-2 text-sm">
           Do you have an account?
           <Link href="login" className="text-spotify_green underline">
             Sign in.
