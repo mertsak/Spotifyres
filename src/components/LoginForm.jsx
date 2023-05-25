@@ -4,6 +4,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
   const notify = (values) => {
@@ -28,8 +29,13 @@ const LoginForm = () => {
           "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
         ),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const result = await signIn("credentials", {
+        username: values.email,
+        password: values.password,
+        redirect: true,
+        callbackUrl: "/",
+      });
     },
   });
 
@@ -43,7 +49,7 @@ const LoginForm = () => {
       {/* Email  */}
       <div className="flex flex-col justify-center items-start w-[40%]">
         <label className="text-sm mb-1" htmlFor="email">
-          E-posta adresi veya kullanıcı adı
+          Email address or username
         </label>
         <input
           id="email"
@@ -53,7 +59,7 @@ const LoginForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.email}
           className="w-full border border-sidebar_text text-black placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
-          placeholder="Enter your email address"
+          placeholder="Email address or username"
         />
         {formik.touched.email && formik.errors.email ? (
           <div className="text-red-500 text-xs mt-1">{formik.errors.email}</div>
@@ -63,7 +69,7 @@ const LoginForm = () => {
       {/* Password  */}
       <div className="flex flex-col justify-center items-start w-[40%]">
         <label className="text-sm mb-1" htmlFor="email">
-          Parola
+          Password
         </label>
         <input
           id="password"
@@ -72,6 +78,7 @@ const LoginForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
+          placeholder="Password"
           className="w-full border border-sidebar_text text-black placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
         />
         {formik.touched.password && formik.errors.password ? (

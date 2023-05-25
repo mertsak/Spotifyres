@@ -10,13 +10,18 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { FiExternalLink } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
+  const { data: user } = useSession();
+
+  console.log(user);
+
   const [dropHandle, setDropHandle] = useState(false);
 
   const { searchPath } = useSelector((state) => state.spotify);
 
-  const auth = useSelector((state) => state.auth);
+  const { auth } = useSelector((state) => state.auth);
 
   return (
     <div className="w-full h-16 py-4 px-8">
@@ -59,7 +64,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {auth === true ? (
+        {user ? (
           <div className="flex justify-center items-center gap-4 ">
             {/* auth login */}
             {/* upgrade */}
@@ -76,7 +81,7 @@ const Navbar = () => {
                 <SlUser className="text-md font-bold" />
               </div>
 
-              <span className="text-xs font-bold">mert sakınç</span>
+              <span className="text-xs font-bold"> {user.user.name} </span>
 
               {dropHandle === false ? (
                 <IoMdArrowDropdown className="text-2xl" />
@@ -107,7 +112,9 @@ const Navbar = () => {
                     </li>
                     <hr className="text-sidebar_text opacity-30" />
                     <li className="hover:bg-user_nav_bg duration-300">
-                      <button className="p-3">Log out</button>
+                      <button onClick={() => signOut()} className="p-3">
+                        Log out
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -150,6 +157,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     href="login"
+                    onClick={() => signIn()}
                     className="text-md font-bold bg-white text-black px-10 py-3 rounded-full hover:bg-gray-200 duration-300 hover:scale-105"
                   >
                     Log in

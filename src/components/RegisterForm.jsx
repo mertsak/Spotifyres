@@ -4,8 +4,11 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const notify = (values) => {
     if (
       values.shareInfo === "" ||
@@ -18,7 +21,7 @@ const RegisterForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
+      name: "",
       password: "",
       email: "",
       day: "",
@@ -28,7 +31,7 @@ const RegisterForm = () => {
       shareInfo: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string()
+      name: Yup.string()
         .min(6, "Must be 6 characters or more.")
         .max(15, "Must be 15 characters or less.")
         .required("Required"),
@@ -48,7 +51,12 @@ const RegisterForm = () => {
       shareInfo: Yup.string().required("Required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/api/user",
+        data: values,
+      })
+        .then(router.push("/login"))
     },
   });
 
@@ -93,6 +101,7 @@ const RegisterForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
+          placeholder="Create password"
           className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
         />
         {formik.touched.password && formik.errors.password ? (
@@ -104,22 +113,21 @@ const RegisterForm = () => {
 
       {/* Firstname  */}
       <div className="flex flex-col justify-center items-start w-full">
-        <label className="text-sm mb-1" htmlFor="firstName">
+        <label className="text-sm mb-1" htmlFor="name">
           What name should we call you by?
         </label>
         <input
-          id="firstName"
-          name="firstName"
+          id="name"
+          name="name"
           type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.firstName}
+          value={formik.values.name}
+          placeholder="Enter profile name"
           className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
         />
-        {formik.touched.firstName && formik.errors.firstName ? (
-          <div className="text-red-500 text-xs mt-1">
-            {formik.errors.firstName}
-          </div>
+        {formik.touched.name && formik.errors.name ? (
+          <div className="text-red-500 text-xs mt-1">{formik.errors.name}</div>
         ) : null}
       </div>
 
@@ -143,6 +151,7 @@ const RegisterForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.day}
+              placeholder="GG"
               className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
             />
           </div>
@@ -194,6 +203,7 @@ const RegisterForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.year}
+              placeholder="YYYY"
               className="w-full border border-sidebar_text placeholder:text-gray-900 rounded-md py-3 pl-2 font-sans text-sm"
             />
           </div>
