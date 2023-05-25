@@ -55,8 +55,7 @@ const RegisterForm = () => {
         method: "POST",
         url: "http://localhost:3000/api/user",
         data: values,
-      })
-        .then(router.push("/login"))
+      }).then(router.push("/login"));
     },
   });
 
@@ -65,8 +64,6 @@ const RegisterForm = () => {
       className="w-full flex flex-col gap-6 justify-center items-start text-black"
       onSubmit={formik.handleSubmit}
     >
-      <h2 className="mx-auto w-full text-lg">E-posta adresinle kaydol</h2>
-
       <ToastContainer />
 
       {/* Email  */}
@@ -286,7 +283,7 @@ const RegisterForm = () => {
             className="mt-1"
           />
           <label className="text-xs text-left text-gray-900">
-            Share my registration data with Spotify's content providers for
+            Share my registration data with LYRIKS's content providers for
             marketing purposes. Note that your data may be transferred to a
             country outside of the EEA as outlined in our privacy policy.
           </label>

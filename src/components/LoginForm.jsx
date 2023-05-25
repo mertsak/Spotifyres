@@ -108,7 +108,7 @@ const LoginForm = () => {
         <span className="flex justify-center items-center gap-2 text-sm">
           Hesabın yok mu?
           <Link href="register" className="text-spotify_green underline">
-            Spotify için kaydol
+            LYRIKS için kaydol
           </Link>
         </span>
       </div>
