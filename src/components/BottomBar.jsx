@@ -6,13 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { setControls, setPlaying, setSidebar } from "@/redux/spotifySlice";
 import Image from "next/image";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { addToFavorite } from "@/redux/spotifySlice";
-
+import { addToFavorite, nextSong, prevSong } from "@/redux/spotifySlice";
 import { useRef } from "react";
 import Fullscreen from "./Fullscreen";
 
 const BottomBar = () => {
   const dispatch = useDispatch();
+
+  const { recentlySongs } = useSelector((state) => state.spotify);
 
   const fsRef = useRef();
   const [show, toggle] = useToggle(false);
@@ -61,7 +62,6 @@ const BottomBar = () => {
   const handleChangeHeart = (current) => {
     dispatch(addToFavorite(current));
   };
-
 
   return (
     <div className="flex justify-between items-center px-4 h-24 bg-bottombar_bg border-t border-bottombar_border">
@@ -168,7 +168,10 @@ const BottomBar = () => {
             </svg>
           </button>
 
-          <button className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300">
+          <button
+            onClick={() => dispatch(prevSong(recentlySongs))}
+            className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300"
+          >
             <svg
               role="img"
               height="16"
@@ -211,7 +214,10 @@ const BottomBar = () => {
             )}
           </button>
 
-          <button className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300">
+          <button
+            onClick={() => dispatch(nextSong(recentlySongs))}
+            className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300"
+          >
             <svg
               role="img"
               height="16"
@@ -378,7 +384,6 @@ const BottomBar = () => {
             }}
           />
         </div>
-
         <button
           className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300"
           onClick={() => toggle()}

@@ -15,8 +15,6 @@ import { useSession, signIn, signOut } from "next-auth/react";
 const Navbar = () => {
   const { data: user } = useSession();
 
-  console.log(user);
-
   const [dropHandle, setDropHandle] = useState(false);
 
   const { searchPath } = useSelector((state) => state.spotify);

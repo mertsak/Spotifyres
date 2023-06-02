@@ -8,8 +8,8 @@ import {
   ContextMenuItem,
   Submenu,
 } from "rctx-contextmenu";
-import { addToLibrary } from "@/redux/spotifySlice";
-import { useState } from "react";
+import { addToLibrary, changeCount } from "@/redux/spotifySlice";
+import { useEffect } from "react";
 
 const SongItem = ({ RecentlySong }) => {
   const dispatch = useDispatch();
@@ -28,6 +28,14 @@ const SongItem = ({ RecentlySong }) => {
     }
   };
 
+  useEffect(() => {
+    if (current?.id === RecentlySong.id && playing) {
+      dispatch(changeCount(RecentlySong.id));
+    } else if (current?.id === RecentlySong.id && !playing) {
+      dispatch(changeCount(RecentlySong.id));
+    }
+  }, [current]);
+
   const isCurrentItem = current?.id === RecentlySong.id && playing;
 
   const key = RecentlySong.id;
@@ -39,7 +47,7 @@ const SongItem = ({ RecentlySong }) => {
   };
 
   return (
-    <>
+    <div>
       <ContextMenuTrigger id={key}>
         <div
           key={key}
@@ -125,7 +133,7 @@ const SongItem = ({ RecentlySong }) => {
           </ContextMenuItem>
         </Submenu>
       </ContextMenu>
-    </>
+    </div>
   );
 };
 

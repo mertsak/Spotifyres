@@ -14,6 +14,7 @@ export const spotifySlice = createSlice({
     favorites: [],
     albums: albumsData,
     recentlySongs: RecentlySongs,
+    count: 0,
   },
   reducers: {
     setCurrent: (state, action) => {
@@ -63,6 +64,32 @@ export const spotifySlice = createSlice({
         state.favorites.push({ ...action.payload, heart: true });
       }
     },
+    nextSong: (state, action) => {
+      state.count = state.count + 1;
+
+      action.payload.map((item) => {
+        item.inner_album.map((x) => {
+          if (x.id === state.count) {
+            state.current = x;
+          }
+        });
+      });
+    },
+    prevSong: (state, action) => {
+      state.count = state.count - 1;
+
+      action.payload.map((item) => {
+        item.inner_album.map((x) => {
+          if (x.id === state.count) {
+            state.current = x;
+          }
+        });
+      });
+    },
+    changeCount: (state, action) => {
+      console.log(action.payload);
+      state.count = action.payload;
+    },
   },
 });
 
@@ -75,6 +102,9 @@ export const {
   searchPath,
   addToLibrary,
   addToFavorite,
+  nextSong,
+  prevSong,
+  changeCount,
 } = spotifySlice.actions;
 
 export default spotifySlice.reducer;

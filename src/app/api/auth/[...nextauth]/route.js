@@ -1,14 +1,8 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
@@ -42,14 +36,13 @@ const handler = NextAuth({
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
 
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameters
         }
       },
     }),
   ],
   pages: {
     signIn: "/login",
-    
   },
 });
 

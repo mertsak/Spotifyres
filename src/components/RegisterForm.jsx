@@ -50,12 +50,22 @@ const RegisterForm = () => {
       gender: Yup.string().required("You need to choose your gender."),
       shareInfo: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/api/user",
-        data: values,
-      }).then(router.push("/login"));
+    onSubmit: async (values) => {
+      try {
+        let res = await axios({
+          method: "POST",
+          url: "http://localhost:3000/api/user",
+          data: values,
+        });
+        if (res.status === 200) {
+          toast.success("You are redirected to the login page.");
+          router.push("/login");
+        }
+      } catch (error) {
+        if (error.response.status === 500) {
+          toast.error("Account already exists at this email address.");
+        }
+      }
     },
   });
 
