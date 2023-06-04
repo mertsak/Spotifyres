@@ -38,7 +38,6 @@ const Suggested = ({ RecentlySong, key }) => {
           width={100}
           height={100}
           className="rounded-md"
-          y
           alt="Picture of the author"
         />
 
