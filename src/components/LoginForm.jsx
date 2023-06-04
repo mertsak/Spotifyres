@@ -110,8 +110,8 @@ const LoginForm = () => {
           </button>
         </div>
 
-        <div class="inline-flex items-center justify-center w-full">
-          <hr class="w-[65%] h-px my-4 bg-white border-0 opacity-30" />
+        <div className="inline-flex items-center justify-center w-full">
+          <hr className="w-[65%] h-px my-4 bg-white border-0 opacity-30" />
         </div>
 
         {/* have account  */}
