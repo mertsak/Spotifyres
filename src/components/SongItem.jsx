@@ -10,6 +10,7 @@ import {
 } from "rctx-contextmenu";
 import { addToLibrary, changeCount } from "@/redux/spotifySlice";
 import { useEffect } from "react";
+import Link from "next/link";
 
 const SongItem = ({ RecentlySong }) => {
   const dispatch = useDispatch();
@@ -40,14 +41,15 @@ const SongItem = ({ RecentlySong }) => {
 
   const key = RecentlySong.id;
 
-  const handleAddLibrary = (id) => {
+  const handleAddLibrary = (id, e) => {
+    e.preventDefault();
     if (RecentlySong.id === id) {
       dispatch(addToLibrary(RecentlySong));
     }
   };
 
   return (
-    <div>
+    <Link href={`playlist/${key}`}>
       <ContextMenuTrigger id={key}>
         <div
           key={key}
@@ -117,7 +119,7 @@ const SongItem = ({ RecentlySong }) => {
           Report
         </ContextMenuItem>
         <ContextMenuItem
-          onClick={() => handleAddLibrary(RecentlySong.id)}
+          onClick={(e) => handleAddLibrary(RecentlySong.id, e)}
           className="hover:bg-suggested_bg duration-300"
         >
           {RecentlySong.libInfo === false
@@ -133,7 +135,7 @@ const SongItem = ({ RecentlySong }) => {
           </ContextMenuItem>
         </Submenu>
       </ContextMenu>
-    </div>
+    </Link>
   );
 };
 

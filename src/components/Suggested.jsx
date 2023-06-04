@@ -3,13 +3,16 @@ import React from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/redux/spotifySlice";
+import Link from "next/link";
 
 const Suggested = ({ RecentlySong, key }) => {
   const dispatch = useDispatch();
 
   const { current, playing, controls } = useSelector((state) => state.spotify);
 
-  const handlebutton = () => {
+  const handlebutton = (e) => {
+    e.preventDefault();
+
     if (current.id === RecentlySong.id) {
       if (playing) {
         controls.pause();
@@ -24,7 +27,8 @@ const Suggested = ({ RecentlySong, key }) => {
   const isCurrentItem = current?.id === RecentlySong.id && playing;
 
   return (
-    <div
+    <Link
+      href={`playlist/${RecentlySong.id}`}
       key={key}
       className="flex justify-start items-center rounded-md bg-gray-700 group cursor-pointer bg-suggested_bg hover:bg-suggested_bg_hover duration-300"
     >
@@ -44,7 +48,7 @@ const Suggested = ({ RecentlySong, key }) => {
 
         <div className="group-hover:opacity-100 duration-500 absolute bottom-6 right-5 opacity-0">
           <button
-            onClick={() => handlebutton()}
+            onClick={(e) => handlebutton(e)}
             className="w-12 h-12 rounded-full bg-spotify_green flex items-center justify-center hover:scale-105 duration-300"
           >
             {isCurrentItem === false ? (
@@ -73,7 +77,7 @@ const Suggested = ({ RecentlySong, key }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

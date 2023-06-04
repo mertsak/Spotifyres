@@ -50,7 +50,7 @@ export const spotifySlice = createSlice({
     addToFavorite: (state, action) => {
       const { id } = action.payload;
 
-      state.library.map((item) => {
+      state.recentlySongs.map((item) => {
         item.inner_album.map((x) => {
           if (x.id === id) {
             x.heart = !x.heart;
@@ -87,7 +87,6 @@ export const spotifySlice = createSlice({
       });
     },
     changeCount: (state, action) => {
-      console.log(action.payload);
       state.count = action.payload;
     },
   },

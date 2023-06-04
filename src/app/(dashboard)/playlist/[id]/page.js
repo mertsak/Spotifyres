@@ -10,7 +10,7 @@ import { addToFavorite } from "@/redux/spotifySlice";
 
 const page = ({ params }) => {
   const dispatch = useDispatch();
-  const library = useSelector((state) => state.spotify.library);
+  const library = useSelector((state) => state.spotify.recentlySongs);
   const album = library.filter((item) => item.id === Number(params.id));
   const playlistHeart = album[0]?.inner_album[0].heart;
 
