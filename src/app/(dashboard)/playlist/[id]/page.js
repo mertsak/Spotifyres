@@ -1,12 +1,9 @@
 "use client";
 import Image from "next/image";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setCurrent } from "@/redux/spotifySlice";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrent, addToFavorite } from "@/redux/spotifySlice";
 import PlaylistSingleItem from "@/components/PlaylistSingleItem";
 import Footer from "@/components/Footer";
-import { addToFavorite } from "@/redux/spotifySlice";
 
 const page = ({ params }) => {
   const dispatch = useDispatch();
@@ -177,9 +174,11 @@ const page = ({ params }) => {
         <hr className="text-sidebar_text opacity-20 pb-4" />
 
         {album.map((items) => (
-          <div key={items.id}>
+          <div>
             {items.inner_album.map((item, index) => (
-              <PlaylistSingleItem item={item} index={index} />
+              <div key={item.id}>
+                <PlaylistSingleItem item={item} index={index} />
+              </div>
             ))}
           </div>
         ))}

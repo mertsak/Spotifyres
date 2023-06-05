@@ -1,8 +1,6 @@
 "use client";
-import React from "react";
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setCurrent } from "@/redux/spotifySlice";
 import LikedSingleItem from "@/components/LikedSingleItem";
 import Footer from "@/components/Footer";

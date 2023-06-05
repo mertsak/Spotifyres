@@ -33,9 +33,7 @@ const Content = () => {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3  items-center justify-start gap-6">
             {withoutLast.map((RecentlySong) => {
-              return (
-                <Suggested key={RecentlySong.id} RecentlySong={RecentlySong} />
-              );
+              return <Suggested RecentlySong={RecentlySong} />;
             })}
           </div>
         </section>

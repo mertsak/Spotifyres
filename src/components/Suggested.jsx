@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/redux/spotifySlice";
 import Link from "next/link";
 
-const Suggested = ({ RecentlySong, key }) => {
+const Suggested = ({ RecentlySong }) => {
   const dispatch = useDispatch();
 
   const { current, playing, controls } = useSelector((state) => state.spotify);
@@ -29,7 +28,7 @@ const Suggested = ({ RecentlySong, key }) => {
   return (
     <Link
       href={`playlist/${RecentlySong.id}`}
-      key={key}
+      key={RecentlySong.id}
       className="flex justify-start items-center rounded-md bg-gray-700 group cursor-pointer bg-suggested_bg hover:bg-suggested_bg_hover duration-300"
     >
       <div className="relative w-full flex justify-start items-center">

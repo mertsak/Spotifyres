@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   return (
     <footer className="my-20 flex justify-between items-start flex-wrap gap-y-5">

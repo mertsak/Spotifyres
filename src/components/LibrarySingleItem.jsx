@@ -1,14 +1,12 @@
-import React from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrent } from "@/redux/spotifySlice";
+import { setCurrent, addToLibrary } from "@/redux/spotifySlice";
 import {
   ContextMenuTrigger,
   ContextMenu,
   ContextMenuItem,
   Submenu,
 } from "rctx-contextmenu";
-import { addToLibrary } from "@/redux/spotifySlice";
 
 const LibrarySingleItem = ({ item, index }) => {
   const dispatch = useDispatch();

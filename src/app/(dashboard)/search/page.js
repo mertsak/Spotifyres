@@ -31,8 +31,7 @@ const page = () => {
             >
               <div>
                 <p className="pl-4 pt-4 text-xl break-all font-black">
-                  {" "}
-                  {album.title}{" "}
+                  {album.title}
                 </p>
               </div>
 

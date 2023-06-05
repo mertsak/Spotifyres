@@ -1,13 +1,18 @@
 "use client";
 import { useAudio, useFullscreen, useToggle } from "react-use";
 import CustomRange from "./CustomRange";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setControls, setPlaying, setSidebar } from "@/redux/spotifySlice";
+import {
+  setControls,
+  setPlaying,
+  setSidebar,
+  nextSong,
+  prevSong,
+} from "@/redux/spotifySlice";
 import Image from "next/image";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { nextSong, prevSong } from "@/redux/spotifySlice";
-import { useRef } from "react";
+
 import Fullscreen from "./Fullscreen";
 
 const BottomBar = () => {

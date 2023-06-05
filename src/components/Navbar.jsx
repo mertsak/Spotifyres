@@ -4,7 +4,6 @@ import {
   MdOutlineArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
-
 import { SlUser } from "react-icons/sl";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { FiExternalLink } from "react-icons/fi";
@@ -18,8 +17,6 @@ const Navbar = () => {
   const [dropHandle, setDropHandle] = useState(false);
 
   const { searchPath } = useSelector((state) => state.spotify);
-
-  const { auth } = useSelector((state) => state.auth);
 
   return (
     <div className="w-full h-16 py-4 px-8">

@@ -1,14 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrent } from "@/redux/spotifySlice";
 import {
   ContextMenuTrigger,
   ContextMenu,
   ContextMenuItem,
   Submenu,
 } from "rctx-contextmenu";
-import { addToLibrary, changeCount } from "@/redux/spotifySlice";
+import { addToLibrary, changeCount, setCurrent } from "@/redux/spotifySlice";
 import { useEffect } from "react";
 import Link from "next/link";
 
@@ -52,7 +51,7 @@ const SongItem = ({ RecentlySong }) => {
     <Link href={`playlist/${key}`}>
       <ContextMenuTrigger id={key}>
         <div
-          key={key}
+          key={RecentlySong.id}
           className="group p-4 cursor-pointer flex justify-center items-center flex-col bg-bottombar_bg  rounded-md duration-300 hover:bg-bottombar_border"
         >
           <div className="relative w-full">
