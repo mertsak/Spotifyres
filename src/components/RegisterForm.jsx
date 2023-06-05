@@ -44,9 +44,22 @@ const RegisterForm = () => {
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
           "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
         ),
-      day: Yup.string().required("Enter a valid day of the month."),
+      day: Yup.number()
+        .integer()
+        .positive()
+        .min(1, "Enter a valid year.")
+        .max(31, "you entered the wrong day value")
+        .required("Enter a valid year."),
       month: Yup.string().required("Choose the month you were born."),
-      year: Yup.string().required("Enter a valid year."),
+      year: Yup.number()
+        .integer()
+        .positive()
+        .min(1900, "Enter a valid year.")
+        .max(
+          2010,
+          "You entered a year younger than 13 and later than this year."
+        )
+        .required("Enter a valid year."),
       gender: Yup.string().required("You need to choose your gender."),
       shareInfo: Yup.string().required("Required"),
     }),
@@ -154,7 +167,8 @@ const RegisterForm = () => {
             <input
               id="day"
               name="day"
-              type="text"
+              type="number"
+              maxLength={2}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.day}
@@ -206,8 +220,9 @@ const RegisterForm = () => {
             <input
               id="year"
               name="year"
-              type="text"
+              type="number"
               onChange={formik.handleChange}
+              maxLength={4}
               onBlur={formik.handleBlur}
               value={formik.values.year}
               placeholder="YYYY"

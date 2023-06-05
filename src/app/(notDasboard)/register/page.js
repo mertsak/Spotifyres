@@ -16,7 +16,7 @@ const page = () => {
 
         {/* register info text */}
         <h2 className="text-black text-3xl font-black tracking-tighter mt-10">
-          Dinlemeye başlamak için ücretsiz kaydol.
+          Sign up for free to start listening.
         </h2>
       </div>
 

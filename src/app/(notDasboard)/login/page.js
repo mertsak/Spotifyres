@@ -8,7 +8,7 @@ const page = () => {
       <div className="mb-8 w-full flex flex-col justify-center items-center">
         {/* login info text */}
         <div className="text-white text-5xl font-black tracking-tighter mb-5">
-          LYRIKS'da oturum aç
+          Sign in to LYRIKS
         </div>
       </div>
 

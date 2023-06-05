@@ -15,7 +15,7 @@
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "formik": "^2.2.9",
-    "next": "^13.3.0",
+    "next": "^13.4.4",
     "next-auth": "^4.22.1",
     "package-name": "^0.1.0",
     "rctx-contextmenu": "^1.4.1",

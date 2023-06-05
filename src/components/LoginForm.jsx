@@ -106,7 +106,7 @@ const LoginForm = () => {
             className="bg-spotify_green flex justify-center items-center px-12 py-3 rounded-full hover:scale-105 duration-300"
             type="submit"
           >
-            Oturum Aç
+            Sign In
           </button>
         </div>
 
@@ -117,9 +117,9 @@ const LoginForm = () => {
         {/* have account  */}
         <div className="flex justify-center items-center w-[40%]">
           <span className="flex justify-center items-center gap-2 text-sm">
-            Hesabın yok mu?
+            Don't have an account?
             <Link href="register" className="text-spotify_green underline">
-              LYRIKS için kaydol
+              Sign up for LYRICS
             </Link>
           </span>
         </div>
