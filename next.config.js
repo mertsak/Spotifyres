@@ -21,7 +21,7 @@ const nextConfig = {
 };
 
 // next.config.js
-module.exports = {
+const cors = {
   async headers() {
     return [
       {
@@ -45,4 +45,4 @@ module.exports = {
   },
 };
 
-module.exports = nextConfig;
+(module.exports = nextConfig), cors;
