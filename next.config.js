@@ -60,4 +60,4 @@ const nextConfig = {
 
 // next.config.js
 
-(module.exports = nextConfig), cors;
+module.exports = nextConfig;
