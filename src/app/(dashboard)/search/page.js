@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchPath } from "@/redux/spotifySlice";
 import Image from "next/image";
 
-const page = () => {
+const Search = () => {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const albums = useSelector((state) => state.spotify.albums);
@@ -51,4 +51,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Search;

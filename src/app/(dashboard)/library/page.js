@@ -2,7 +2,7 @@
 import LibrarySingleItem from "@/components/LibrarySingleItem";
 import { useSelector } from "react-redux";
 
-const page = () => {
+const Library = () => {
   const { library } = useSelector((state) => state.spotify);
 
   return (
@@ -50,4 +50,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Library;

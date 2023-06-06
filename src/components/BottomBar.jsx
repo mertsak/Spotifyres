@@ -28,7 +28,7 @@ const BottomBar = () => {
 
   const { current, sidebar } = useSelector((state) => state.spotify);
 
-  const [audio, state, controls, ref] = useAudio({
+  const [audio, state, controls] = useAudio({
     src: current?.src,
   });
 

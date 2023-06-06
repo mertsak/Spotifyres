@@ -5,7 +5,7 @@ import { setCurrent, addToFavorite } from "@/redux/spotifySlice";
 import PlaylistSingleItem from "@/components/PlaylistSingleItem";
 import Footer from "@/components/Footer";
 
-const page = ({ params }) => {
+const Playlist = ({ params }) => {
   const dispatch = useDispatch();
   const library = useSelector((state) => state.spotify.recentlySongs);
   const album = library.filter((item) => item.id === Number(params.id));
@@ -189,4 +189,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Playlist;

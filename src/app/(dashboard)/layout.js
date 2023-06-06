@@ -8,6 +8,13 @@ import SessionProviders from "@/components/SessionProviders";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <title>Lyricks</title>
+        <meta name="description" content="Spotify Clone" />
+        <meta name="author" content="Mert Sakınç" />
+        <link rel="icon" href="/favicon.png" sizes="any" />
+      </head>
+
       <body>
         <StoreProvider>
           <SessionProviders>

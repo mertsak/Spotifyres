@@ -3,7 +3,7 @@ import RegisterForm from "@/components/RegisterForm";
 import Link from "next/link";
 import Image from "next/image";
 
-const page = () => {
+const Register = () => {
   return (
     <div className="flex flex-col justify-center pt-10 pb-20 items-center w-[450px] mx-auto text-center">
       {/*  Header */}
@@ -25,4 +25,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Register;

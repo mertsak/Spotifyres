@@ -1,7 +1,7 @@
 "use client";
 import LoginForm from "@/components/LoginForm";
 
-const page = () => {
+const Login = () => {
   return (
     <div className="flex flex-col bg-black py-20 justify-center m-8 items-center w-[750px] mx-auto text-center">
       {/*  Header */}
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;

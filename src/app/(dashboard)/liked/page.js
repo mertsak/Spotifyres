@@ -5,7 +5,7 @@ import { setCurrent } from "@/redux/spotifySlice";
 import LikedSingleItem from "@/components/LikedSingleItem";
 import Footer from "@/components/Footer";
 
-const page = () => {
+const Liked = () => {
   const dispatch = useDispatch();
   const { current, playing, controls, favorites } = useSelector(
     (state) => state.spotify
@@ -197,4 +197,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Liked;
