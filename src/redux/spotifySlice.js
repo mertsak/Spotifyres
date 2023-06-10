@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import albumsData from "@/redux/services/search-album/search-albums";
 import RecentlySongs from "@/redux/services/recently-played/recently-songs";
+import recentlySongs from "@/redux/services/recently-played/recently-songs";
 
 export const spotifySlice = createSlice({
   name: "spotify",
@@ -89,6 +90,20 @@ export const spotifySlice = createSlice({
     changeCount: (state, action) => {
       state.count = action.payload;
     },
+    shuffleSongs: (state, action) => {
+      const min = 1;
+      const max = 35;
+
+      let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      action.payload.map((item) => {
+        item.inner_album.map((x) => {
+          if (x.id === randomNum) {
+            state.current = x;
+          }
+        });
+      });
+    },
   },
 });
 
@@ -104,6 +119,7 @@ export const {
   nextSong,
   prevSong,
   changeCount,
+  shuffleSongs,
 } = spotifySlice.actions;
 
 export default spotifySlice.reducer;

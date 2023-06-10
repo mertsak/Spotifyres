@@ -31,6 +31,22 @@ const Playlist = ({ params }) => {
     dispatch(addToFavorite(current));
   };
 
+  const playlistTimeCalc = (inner_album) => {
+    const totalTime = inner_album.map((item) => {
+      let calcSplit = item.time.split(":");
+      const minutes = Number(calcSplit[0]);
+      const seconds = Number(calcSplit[1]);
+      const timeValue = minutes * 60 + seconds;
+      return timeValue;
+    });
+
+    const total = totalTime.reduce((a, b) => a + b, 0);
+    const minutes = Math.floor(total / 60);
+    const seconds = total - minutes * 60;
+    const totalTimeCalc = `${minutes}:${seconds}`;
+    return totalTimeCalc;
+  };
+
   return (
     <>
       <div className="h-[30vh] px-8 flex items-center">
@@ -57,7 +73,9 @@ const Playlist = ({ params }) => {
                 />
                 <p>LYRIKS ||</p>
                 <p>{item.inner_album.length} , songs</p>
-                <p className="text-sidebar_text">about 2 hr 15 min</p>
+                <p className="text-sidebar_text">
+                  about {playlistTimeCalc(item.inner_album)}
+                </p>
               </div>
             </div>
           </div>

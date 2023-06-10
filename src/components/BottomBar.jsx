@@ -9,6 +9,7 @@ import {
   setSidebar,
   nextSong,
   prevSong,
+  shuffleSongs,
 } from "@/redux/spotifySlice";
 import Image from "next/image";
 import { AiOutlineFullscreen } from "react-icons/ai";
@@ -124,7 +125,10 @@ const BottomBar = () => {
 
       <div className="flex flex-col px-4 items-center max-w-[45.125rem] w-[40%]">
         <div className="flex space-x-2 items-center">
-          <button className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300">
+          <button
+            onClick={() => dispatch(shuffleSongs(recentlySongs))}
+            className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300"
+          >
             <svg
               role="img"
               height="16"

@@ -64,13 +64,6 @@ const Sidebar = () => {
           {/* sidebar footer container */}
 
           <div className="mt-6 w-full h-full">
-            <div className="px-2">
-              <button className="flex justify-start items-center gap-4 px-4 h-10 hover:text-sidebar_text_active duration-300">
-                <BsPlusSquareFill className="text-2xl" />
-                <span>Create Playlist</span>
-              </button>
-            </div>
-
             <Link href="liked">
               <button className="flex justify-start items-center gap-4 px-6 h-10 hover:text-sidebar_text_active group duration-300">
                 <div className=" h-[24px] w-[24px] flex items-center justify-center opacity-70 group-hover:opacity-100  bg-gradient-to-br from-purple-700 rounded-sm to-blue-300">
