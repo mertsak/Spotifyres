@@ -10,13 +10,23 @@ import { FiExternalLink } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const { data: user } = useSession();
 
   const [dropHandle, setDropHandle] = useState(false);
 
   const { searchPath } = useSelector((state) => state.spotify);
+
+  const handlePrev = () => {
+    router.back();
+  };
+
+  const handleNext = () => {
+    router.forward();
+  };
 
   return (
     <div className="w-full h-16 py-4 px-8">
@@ -27,11 +37,17 @@ const Navbar = () => {
           <div className="flex justify-center items-center gap-4">
             {/* left arrow */}
 
-            <button className="bg-arrow_bg flex justify-center items-center rounded-full h-8 w-8">
+            <button
+              onClick={() => handlePrev()}
+              className="bg-arrow_bg flex justify-center items-center rounded-full h-8 w-8"
+            >
               <MdOutlineArrowBackIosNew className="text-xl" />
             </button>
             {/* right arrow */}
-            <button className="bg-arrow_bg flex justify-center items-center rounded-full h-8 w-8">
+            <button
+              onClick={() => handleNext()}
+              className="bg-arrow_bg flex justify-center items-center rounded-full h-8 w-8"
+            >
               <MdOutlineArrowForwardIos className="text-xl" />
             </button>
           </div>
