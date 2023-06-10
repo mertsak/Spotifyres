@@ -65,6 +65,10 @@ const BottomBar = () => {
     return "volumeFull";
   }, [state.volume, state.muted]);
 
+  const handleSongRepeat = () => {
+    controls.seek(0);
+  };
+
   return (
     <div className="flex justify-between items-center px-4 h-24 bg-bottombar_bg border-t border-bottombar_border">
       <div className="min-w-[11.25rem] w-[30%]  ">
@@ -204,7 +208,10 @@ const BottomBar = () => {
             </svg>
           </button>
 
-          <button className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300">
+          <button
+            onClick={() => handleSongRepeat()}
+            className="flex justify-center items-center h-8 w-8 fill-white opacity-70 hover:opacity-100 duration-300"
+          >
             <svg
               role="img"
               height="16"

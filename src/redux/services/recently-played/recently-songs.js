@@ -239,7 +239,7 @@ export default [
     title: "NKVT",
     music_title: "Hayran Kalıcan",
     artist: "Çakal",
-    description: "Türkiye'nin en sıkı çalma listesi. Kapak: Güneş",
+    description: "Turkey's tightest playlist. Cover: Sun",
     bottombar_image:
       "https://i.scdn.co/image/ab67616d00004851a3de09c26531d82204e5159f",
     album_image:
@@ -317,7 +317,7 @@ export default [
     title: "Slow Pop",
     music_title: "Bozulmuş Kalbim",
     artist: "Semincek, Sancak, Ziynet Sali, İlkan Günüç",
-    description: "En sevdiğin slow şarkılar. Kapak: Hadise",
+    description: "Your favorite slow songs. Cover: Hadise",
     bottombar_image:
       "https://i.scdn.co/image/ab67616d00004851542e5133de1f569982b315d5",
     album_image:
